@@ -22,16 +22,26 @@ public class University {
         return universityId;
     }
 
-    public void setUniversityId(Integer universityId) {
+//    public void setUniversityId(Integer universityId) {
+//        this.universityId = universityId;
+//    }
+
+    public University setUniversityId(Integer universityId) {
         this.universityId = universityId;
+        return this;
     }
 
     public String getUniversityName() {
         return universityName;
     }
 
-    public void setUniversityName(String universityName) {
+//    public void setUniversityName(String universityName) {
+//        this.universityName = universityName;
+//    }
+
+    public University setUniversityName(String universityName) {
         this.universityName = universityName;
+        return this;
     }
 
     @Override

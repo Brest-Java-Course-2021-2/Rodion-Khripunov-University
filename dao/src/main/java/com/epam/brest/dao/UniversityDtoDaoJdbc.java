@@ -2,27 +2,19 @@ package com.epam.brest.dao;
 
 import com.epam.brest.UniversityDtoDao;
 import com.epam.brest.model.dto.UniversityDto;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class UniversityDtoDaoJdbc implements UniversityDtoDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private String findAllWithAvgSalarySql = "SELECT\n" +
-            "\tu.university_id AS universityId,\n" +
-            "\tu.university_name AS universityName,\n" +
-            "\tavg(s.course) AS courseAverage\n" +
-            "FROM\n" +
-            "\tuniversity u\n" +
-            "LEFT JOIN student s ON\n" +
-            "\ts.university_id = u.university_id\n" +
-            "GROUP BY\n" +
-            "\tu.university_id,\n" +
-            "\tu.university_name\n" +
-            "ORDER BY\n" +
-            "\tuniversity_name";
+    @Value("${SQL_FIND_ALL_WITH_AVG_COURSE}")
+    private String findAllWithAvgCourseSql;
 
 
     public UniversityDtoDaoJdbc(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
@@ -31,7 +23,7 @@ public class UniversityDtoDaoJdbc implements UniversityDtoDao {
 
     @Override
     public List<UniversityDto> findAllWithAvgCourse() {
-        List<UniversityDto> universities = namedParameterJdbcTemplate.query(findAllWithAvgSalarySql,
+        List<UniversityDto> universities = namedParameterJdbcTemplate.query(findAllWithAvgCourseSql,
                BeanPropertyRowMapper.newInstance(UniversityDto.class));
         return universities;
     }
