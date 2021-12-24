@@ -31,7 +31,7 @@ public class UniversityController {
 
     @GetMapping(value = "/universities")
     public final String universities(Model model) {
-        model.addAttribute("universities", universityDtoService.findAllWithAvgCourse());
+        model.addAttribute("universities", universityDtoService.findAllWithAvgRating());
         return "universities";
     }
 

@@ -60,14 +60,14 @@
                         <thead class="table-dark">
                         <tr>
                             <th>Title</th>
-                            <th>Avg salary</th>
+                            <th>Average Rating</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="university : ${universities}">
                             <td th:text="${university.universityName}">CEO</td>
-                            <td th:text="${university.courseAverage}">10000</td>
+                            <td th:text="${university.avgRating}">10</td>
                             <td class="text-end">
                                 <a href="university.html"
                                    th:href="@{|/university/${university.universityId}|}"

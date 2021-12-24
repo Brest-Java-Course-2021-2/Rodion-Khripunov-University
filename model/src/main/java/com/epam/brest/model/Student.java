@@ -1,5 +1,7 @@
 package com.epam.brest.model;
 
+import java.math.BigDecimal;
+
 public class Student {
 
     private Integer studentId;
@@ -11,6 +13,8 @@ public class Student {
     private String email;
 
     private Integer course;
+
+    private BigDecimal rating;
 
     private Integer universityId;
 
@@ -52,6 +56,14 @@ public class Student {
 
     public void setCourse(Integer course) {
         this.course = course;
+    }
+
+    public BigDecimal getRating() {
+        return rating;
+    }
+
+    public void setRating(BigDecimal rating) {
+        this.rating = rating;
     }
 
     public Integer getUniversityId() {

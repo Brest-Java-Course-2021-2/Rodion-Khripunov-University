@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,7 +45,7 @@ class UniversityDtoControllerTest {
     @Test
     public void shouldFindAllWithAvgSalary() throws Exception {
 
-        Mockito.when(universityDtoService.findAllWithAvgCourse()).thenReturn(Arrays.asList(create(0), create(1)));
+        Mockito.when(universityDtoService.findAllWithAvgRating()).thenReturn(Arrays.asList(create(0), create(1)));
 
         mockMvc.perform(
                         MockMvcRequestBuilders.get("/university_dto")
@@ -59,14 +60,14 @@ class UniversityDtoControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].courseAverage", Matchers.is(101)))
         ;
 
-        Mockito.verify(universityDtoService).findAllWithAvgCourse();
+        Mockito.verify(universityDtoService).findAllWithAvgRating();
     }
 
     private UniversityDto create(int index) {
         UniversityDto universityDto = new UniversityDto();
         universityDto.setUniversityId(index);
         universityDto.setUniversityName("d" + index);
-        universityDto.setCourseAverage(100 + index);
+        universityDto.setAvgRating(BigDecimal.valueOf(5 + index));
         return universityDto;
     }
 }

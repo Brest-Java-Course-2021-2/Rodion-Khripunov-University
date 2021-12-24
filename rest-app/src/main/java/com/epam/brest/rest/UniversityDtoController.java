@@ -22,6 +22,6 @@ public class UniversityDtoController {
     @GetMapping(value = "/university_dto")
     public final Collection<UniversityDto> universityDto() {
         logger.debug("universityDto()");
-        return universityDtoService.findAllWithAvgCourse();
+        return universityDtoService.findAllWithAvgRating();
     }
 }

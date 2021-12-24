@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @Import({ServiceTestConfig.class})
-@PropertySource({"classpath:sql-university.properties"})
+@PropertySource({"classpath:dao.properties"})
 @Transactional
 class UniversityDtoServiceImplIT {
 
@@ -27,10 +27,10 @@ class UniversityDtoServiceImplIT {
     UniversityDtoService universityDtoService;
 
     @Test
-    public void shouldFindAllWithAvgCourse() {
-        List<UniversityDto> universities = universityDtoService.findAllWithAvgCourse();
+    public void shouldFindAllWithAvgRating() {
+        List<UniversityDto> universities = universityDtoService.findAllWithAvgRating();
         assertNotNull(universities);
         assertTrue(universities.size() > 0);
-        assertTrue(universities.get(0).getCourseAverage() > 0);
+        assertTrue(universities.get(0).getAvgRating().doubleValue() > 0);
     }
 }

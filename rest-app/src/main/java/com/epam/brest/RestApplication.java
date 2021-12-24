@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
-@PropertySource({"classpath:sql-university.properties"})
+@PropertySource({"classpath:dao.properties"})
 public class RestApplication extends SpringBootServletInitializer {
 
     private static final Logger logger = LogManager.getLogger(RestApplication.class);

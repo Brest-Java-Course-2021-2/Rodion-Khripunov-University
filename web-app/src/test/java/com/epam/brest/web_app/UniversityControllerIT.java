@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Arrays;
 
@@ -37,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Disabled
 class UniversityControllerIT {
 
-    private static final String UNIVERSITY_DTO_URL = "http://localhost:8088/university-dto";
+    private static final String UNIVERSITY_DTO_URL = "http://localhost:8088/university_dto";
     private static final String UNIVERSITIES_URL = "http://localhost:8088/universities";
 
     @Autowired
@@ -60,8 +61,8 @@ class UniversityControllerIT {
 
     @Test
     void shouldReturnUniversitiesPage() throws Exception {
-        UniversityDto u1 = createUniversityDto(1, "IT", 5);
-        UniversityDto u2 = createUniversityDto(2, "SECURITY", 4);
+        UniversityDto u1 = createUniversityDto(1, "IT", BigDecimal.valueOf(7));
+        UniversityDto u2 = createUniversityDto(2, "SECURITY", BigDecimal.valueOf(6));
         UniversityDto u3 = createUniversityDto(3, "MANAGEMENT", null);
         mockServer.expect(ExpectedCount.once(), requestTo(new URI(UNIVERSITY_DTO_URL)))
                 .andExpect(method(HttpMethod.GET))
@@ -79,21 +80,21 @@ class UniversityControllerIT {
 //                        allOf(
 //                                hasProperty("universityId", is(u1.getUniversityId())),
 //                                hasProperty("universityName", is(u1.getUniversityName())),
-//                                hasProperty("courseAverage", is(u1.getCourseAverage()))
+//                                hasProperty("avgRating", is(u1.getAvgRating()))
 //                        )
 //                )))
 //                .andExpect(model().attribute("universities", hasItem(
 //                        allOf(
 //                                hasProperty("universityId", is(d2.getUniversityId())),
 //                                hasProperty("universityName", is(d2.getUniversityName())),
-//                                hasProperty("courseAverage", is(d2.getAvgSalary()))
+//                                hasProperty("avgRating", is(d2.getAvgRating()))
 //                        )
 //                )))
 //                .andExpect(model().attribute("universities", hasItem(
 //                        allOf(
 //                                hasProperty("universityId", is(d3.getUniversityId())),
 //                                hasProperty("universityName", is(d3.getUniversityName())),
-//                                hasProperty("courseAverage", isEmptyOrNullString())
+//                                hasProperty("avgRating", isEmptyOrNullString())
 //                        )
 //                )))
         ;
@@ -194,11 +195,11 @@ class UniversityControllerIT {
         mockServer.verify();
     }
 
-    private UniversityDto createUniversityDto(int id, String name, Integer courseAverage) {
+    private UniversityDto createUniversityDto(int id, String name, BigDecimal avgRating) {
         UniversityDto universityDto = new UniversityDto();
         universityDto.setUniversityId(id);
         universityDto.setUniversityName(name);
-        universityDto.setCourseAverage(courseAverage);
+        universityDto.setAvgRating(avgRating);
         return universityDto;
     }
 

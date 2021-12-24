@@ -28,8 +28,8 @@ public class UniversityDtoServiceRest implements UniversityDtoService {
     }
 
     @Override
-    public List<UniversityDto> findAllWithAvgCourse() {
-        logger.debug("findAllWithAvgCourse()");
+    public List<UniversityDto> findAllWithAvgRating() {
+        logger.debug("findAllWithAvgRating()");
         ResponseEntity responseEntity = restTemplate.getForEntity(url, List.class);
         return (List<UniversityDto>) responseEntity.getBody();
     }

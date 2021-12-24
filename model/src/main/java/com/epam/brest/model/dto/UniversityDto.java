@@ -1,12 +1,14 @@
 package com.epam.brest.model.dto;
 
+import java.math.BigDecimal;
+
 public class UniversityDto {
 
     private Integer universityId;
 
     private String universityName;
 
-    private Integer courseAverage;
+    private BigDecimal avgRating;
 
     public UniversityDto(){
     }
@@ -31,12 +33,12 @@ public class UniversityDto {
         this.universityName = universityName;
     }
 
-    public Integer getCourseAverage() {
-        return courseAverage;
+    public BigDecimal getAvgRating() {
+        return avgRating;
     }
 
-    public void setCourseAverage(final Integer courseAverage){
-        this.courseAverage = courseAverage;
+    public void setAvgRating(final BigDecimal avgRating){
+            this.avgRating = avgRating;
     }
 
     @Override
@@ -44,7 +46,7 @@ public class UniversityDto {
         return "UniversityDto{" +
                 "universityId=" + universityId +
                 ", universityName='" + universityName + '\'' +
-                ", courseAverage=" + courseAverage +
+                ", avgRating=" + avgRating +
                 '}';
     }
 }

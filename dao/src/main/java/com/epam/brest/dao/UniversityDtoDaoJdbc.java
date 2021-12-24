@@ -13,8 +13,8 @@ import java.util.List;
 public class UniversityDtoDaoJdbc implements UniversityDtoDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    @Value("${SQL_FIND_ALL_WITH_AVG_COURSE}")
-    private String findAllWithAvgCourseSql;
+    @Value("${SQL_FIND_ALL_WITH_AVG_RATING}")
+    private String findAllWithAvgRatingSql;
 
 
     public UniversityDtoDaoJdbc(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
@@ -22,10 +22,9 @@ public class UniversityDtoDaoJdbc implements UniversityDtoDao {
     }
 
     @Override
-    public List<UniversityDto> findAllWithAvgCourse() {
-        List<UniversityDto> universities = namedParameterJdbcTemplate.query(findAllWithAvgCourseSql,
-               BeanPropertyRowMapper.newInstance(UniversityDto.class));
-        return universities;
+    public List<UniversityDto> findAllWithAvgRating() {
+        return namedParameterJdbcTemplate.query(findAllWithAvgRatingSql,
+                BeanPropertyRowMapper.newInstance(UniversityDto.class));
     }
 
 }

@@ -19,6 +19,7 @@ import org.springframework.test.web.client.ExpectedCount;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
@@ -62,7 +63,7 @@ class UniversityDtoServiceRestTest {
                         .body(mapper.writeValueAsString(Arrays.asList(create(0), create(1))))
                 );
 
-        List<UniversityDto> list = universityDtoService.findAllWithAvgCourse();
+        List<UniversityDto> list = universityDtoService.findAllWithAvgRating();
 
         mockServer.verify();
         assertNotNull(list);
@@ -73,7 +74,7 @@ class UniversityDtoServiceRestTest {
         UniversityDto universityDto = new UniversityDto();
         universityDto.setUniversityId(index);
         universityDto.setUniversityName("d" + index);
-        universityDto.setCourseAverage(100 + index);
+        universityDto.setAvgRating(BigDecimal.valueOf(5 + index));
         return universityDto;
     }
 }

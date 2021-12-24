@@ -19,7 +19,7 @@ public class UniversityDtoServiceImpl implements UniversityDtoService {
     }
 
     @Override
-    public List<UniversityDto> findAllWithAvgCourse() {
-        return universityDtoDao.findAllWithAvgCourse();
+    public List<UniversityDto> findAllWithAvgRating() {
+        return universityDtoDao.findAllWithAvgRating();
     }
 }
