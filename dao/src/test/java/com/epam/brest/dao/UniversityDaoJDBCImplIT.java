@@ -30,7 +30,7 @@ class UniversityDaoJDBCImplIT {
 
     private static final Logger logger = LogManager.getLogger(UniversityDaoJDBCImplIT.class);
 
-    private UniversityDaoJDBCImpl universityDaoJDBC;
+    private final UniversityDaoJDBCImpl universityDaoJDBC;
 
     public UniversityDaoJDBCImplIT(@Autowired UniversityDao universityDaoJDBC) {
         this.universityDaoJDBC = (UniversityDaoJDBCImpl) universityDaoJDBC;
@@ -38,7 +38,7 @@ class UniversityDaoJDBCImplIT {
 
     @Test
     void findAll() {
-        logger.debug("Execute test: findAll()");
+        logger.debug("Execute test: findAllUniversities()");
         assertNotNull(universityDaoJDBC);
         assertNotNull(universityDaoJDBC.findAll());
     }

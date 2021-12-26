@@ -22,6 +22,28 @@ public class Student {
         return studentId;
     }
 
+    public Student() {}
+
+    public Student(String firstName, String lastName, String email , Integer universityId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.course = 1;
+        this.rating = BigDecimal.valueOf(0);
+        this.universityId = universityId;
+    }
+
+    public Student(Integer studentId, String firstName, String lastName, String email, Integer course,
+                   BigDecimal rating, Integer universityId) {
+        this.studentId = studentId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.course = course;
+        this.rating = rating;
+        this.universityId = universityId;
+    }
+
     public void setStudentId(Integer studentId) {
         this.studentId = studentId;
     }
@@ -72,5 +94,18 @@ public class Student {
 
     public void setUniversityId(Integer universityId) {
         this.universityId = universityId;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId=" + studentId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", course=" + course +
+                ", rating=" + rating +
+                ", universityId=" + universityId +
+                '}';
     }
 }

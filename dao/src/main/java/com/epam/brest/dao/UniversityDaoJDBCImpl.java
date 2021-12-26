@@ -22,7 +22,7 @@ public class UniversityDaoJDBCImpl implements UniversityDao {
 
     private final Logger logger = LogManager.getLogger(UniversityDaoJDBCImpl.class);
 
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Value("${SELECT_COUNT_FROM_UNIVERSITY}")
     private String sqlUniversityCount;
@@ -51,16 +51,16 @@ public class UniversityDaoJDBCImpl implements UniversityDao {
 
     @Override
     public List<University> findAll() {
-        logger.debug("Start: findAll()");
+        logger.debug("findAllUniversities()");
         return namedParameterJdbcTemplate.query(sqlUniversityAll, new UniversityRowMapper());
     }
 
     @Override
     public University getUniversityById(Integer universityId) {
         logger.debug("GetUniversityById({})", universityId);
-        SqlParameterSource sqlParameterSource =
-                new MapSqlParameterSource("universityId", universityId);
-        return namedParameterJdbcTemplate.queryForObject(sqlUniversityById, sqlParameterSource, new UniversityRowMapper());
+        SqlParameterSource sqlParameterSource = new MapSqlParameterSource("universityId", universityId);
+        return namedParameterJdbcTemplate
+                .queryForObject(sqlUniversityById, sqlParameterSource, new UniversityRowMapper());
     }
 
     @Override
@@ -81,7 +81,8 @@ public class UniversityDaoJDBCImpl implements UniversityDao {
         logger.debug("Check university name: {} on unique", universityName);
         SqlParameterSource sqlParameterSource =
                 new MapSqlParameterSource("universityName", universityName);
-        return namedParameterJdbcTemplate.queryForObject(sqlUniversityCheckUniqueName, sqlParameterSource, Integer.class) == 0;
+        return namedParameterJdbcTemplate
+                .queryForObject(sqlUniversityCheckUniqueName, sqlParameterSource, Integer.class) == 0;
     }
 
     @Override
@@ -103,10 +104,11 @@ public class UniversityDaoJDBCImpl implements UniversityDao {
     @Override
     public Integer count() {
         logger.debug("Count()");
-        return namedParameterJdbcTemplate.queryForObject(sqlUniversityCount, new MapSqlParameterSource(), Integer.class);
+        return namedParameterJdbcTemplate
+                .queryForObject(sqlUniversityCount, new MapSqlParameterSource(), Integer.class);
     }
 
-    private class UniversityRowMapper implements RowMapper<University> {
+    private static class UniversityRowMapper implements RowMapper<University> {
 
         @Override
         public University mapRow(ResultSet resultSet, int i) throws SQLException {
