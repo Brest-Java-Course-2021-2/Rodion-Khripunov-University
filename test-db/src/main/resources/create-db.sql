@@ -14,6 +14,7 @@ CREATE TABLE student
     student_id INT NOT NULL AUTO_INCREMENT,
     firstname varchar(255) NOT NULL,
     lastname varchar(255) NOT NULL,
+    enrollment_date date NOT NULL,
     email varchar(255) NOT NULL UNIQUE,
     course int NOT NULL,
     rating double NOT NULL,

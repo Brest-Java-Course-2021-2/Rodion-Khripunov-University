@@ -11,6 +11,7 @@ import java.util.List;
 
 @Component
 public class UniversityDtoDaoJdbc implements UniversityDtoDao {
+
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Value("${SQL_FIND_ALL_WITH_AVG_RATING}")

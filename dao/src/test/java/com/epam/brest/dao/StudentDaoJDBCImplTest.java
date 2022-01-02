@@ -58,7 +58,7 @@ class StudentDaoJDBCImplTest {
     }
 
     @Test
-    public void getUniversityById() {
+    public void getStudentById() {
         int id = 0;
         String sql = "get";
         ReflectionTestUtils.setField(studentDaoJDBC, "sqlStudentById", sql);

@@ -1,9 +1,9 @@
-package com.epam.brest.model;
+package com.epam.brest.model.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Student {
+public class StudentDto {
 
     private Integer studentId;
 
@@ -19,22 +19,22 @@ public class Student {
 
     private BigDecimal rating;
 
-    private Integer universityId;
+    private String universityName;
 
-    public Student() {}
+    public StudentDto() {}
 
-    public Student(String firstName, String lastName, String email , Integer universityId) {
+    public StudentDto(String firstName, String lastName, String email , String universityName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.enrollmentDate = LocalDate.now();
         this.email = email;
         this.course = 1;
         this.rating = BigDecimal.valueOf(0);
-        this.universityId = universityId;
+        this.universityName = universityName;
     }
 
-    public Student(Integer studentId, String firstName, String lastName, LocalDate enrollmentDate, String email,
-                   Integer course, BigDecimal rating, Integer universityId) {
+    public StudentDto(Integer studentId, String firstName, String lastName, LocalDate enrollmentDate, String email,
+                   Integer course, BigDecimal rating, String universityName) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,7 +42,7 @@ public class Student {
         this.email = email;
         this.course = course;
         this.rating = rating;
-        this.universityId = universityId;
+        this.universityName = universityName;
     }
 
     public Integer getStudentId() {
@@ -73,7 +73,7 @@ public class Student {
         return enrollmentDate;
     }
 
-    public Student setEnrollmentDate(LocalDate enrollmentDate) {
+    public StudentDto setEnrollmentDate(LocalDate enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
         return this;
     }
@@ -102,12 +102,12 @@ public class Student {
         this.rating = rating;
     }
 
-    public Integer getUniversityId() {
-        return universityId;
+    public String getUniversityName() {
+        return universityName;
     }
 
-    public void setUniversityId(Integer universityId) {
-        this.universityId = universityId;
+    public void setUniversityName(String universityName) {
+        this.universityName = universityName;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class Student {
                 ", email='" + email + '\'' +
                 ", course=" + course +
                 ", rating=" + rating +
-                ", universityId=" + universityId +
+                ", universityName=" + universityName +
                 '}';
     }
 }

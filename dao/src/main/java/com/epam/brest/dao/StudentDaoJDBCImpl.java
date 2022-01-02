@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -72,6 +73,7 @@ public class StudentDaoJDBCImpl implements StudentDao {
         SqlParameterSource sqlParameterSource =
                 new MapSqlParameterSource("firstName", student.getFirstName())
                         .addValue("lastName", student.getLastName())
+                        .addValue("enrollmentDate", student.getEnrollmentDate())
                         .addValue("email", student.getEmail())
                         .addValue("course", student.getCourse())
                         .addValue("rating", student.getRating())
@@ -95,7 +97,11 @@ public class StudentDaoJDBCImpl implements StudentDao {
         SqlParameterSource sqlParameterSource =
                 new MapSqlParameterSource("firstName", student.getFirstName())
                         .addValue("lastName", student.getLastName())
+                        .addValue("enrollmentDate", student.getEnrollmentDate())
                         .addValue("email", student.getEmail())
+                        .addValue("course", student.getCourse())
+                        .addValue("rating", student.getRating())
+                        .addValue("universityId", student.getUniversityId())
                         .addValue("studentId", student.getStudentId());
         return namedParameterJdbcTemplate.update(sqlStudentUpdateEmail, sqlParameterSource);
     }
@@ -122,6 +128,7 @@ public class StudentDaoJDBCImpl implements StudentDao {
             student.setStudentId(resultSet.getInt("student_id"));
             student.setFirstName(resultSet.getString("firstname"));
             student.setLastName(resultSet.getString("lastname"));
+            student.setEnrollmentDate(LocalDate.parse(resultSet.getString("enrollment_date")));
             student.setEmail(resultSet.getString("email"));
             student.setCourse(resultSet.getInt("course"));
             student.setRating(resultSet.getBigDecimal("rating"));
