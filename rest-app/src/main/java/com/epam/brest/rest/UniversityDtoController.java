@@ -11,6 +11,7 @@ import java.util.Collection;
 
 @RestController
 public class UniversityDtoController {
+
     private final Logger logger = LogManager.getLogger(UniversityDtoController.class);
 
     private final UniversityDtoService universityDtoService;

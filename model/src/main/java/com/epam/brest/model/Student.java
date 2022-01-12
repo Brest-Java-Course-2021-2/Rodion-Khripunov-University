@@ -1,5 +1,12 @@
 package com.epam.brest.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -11,6 +18,10 @@ public class Student {
 
     private String lastName;
 
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate enrollmentDate;
 
     private String email;
@@ -24,6 +35,17 @@ public class Student {
     public Student() {}
 
     public Student(String firstName, String lastName, String email , Integer universityId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.enrollmentDate = LocalDate.now();
+        this.email = email;
+        this.course = 1;
+        this.rating = BigDecimal.valueOf(0);
+        this.universityId = universityId;
+    }
+
+    public Student(Integer studentId, String firstName, String lastName, String email , Integer universityId) {
+        this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.enrollmentDate = LocalDate.now();

@@ -43,6 +43,7 @@ class StudentDaoJDBCImplIT {
 
     @Test
     void create() {
+        logger.debug("Execute test: create()");
         assertNotNull(studentDaoJDBC);
         Integer studentSizeBefore = studentDaoJDBC.count();
         Student student = new Student("UserT1", "UserT2", "usert1@gmail.com", 1);
@@ -53,6 +54,7 @@ class StudentDaoJDBCImplIT {
 
     @Test
     void tryToCreateEqualStudents() {
+        logger.debug("Execute test: tryToCreateEqualStudents()");
         assertNotNull(studentDaoJDBC);
         Student student = new Student("UserT1", "UserT2", "usert1@gmail.com", 1);
         assertThrows(IllegalArgumentException.class, () -> {
@@ -63,6 +65,7 @@ class StudentDaoJDBCImplIT {
 
     @Test
     void getStudentById() {
+        logger.debug("Execute test: getStudentById()");
         List<Student> students = studentDaoJDBC.findAll();
         if (students.size() > 0) {
             studentDaoJDBC.create(
@@ -76,6 +79,7 @@ class StudentDaoJDBCImplIT {
 
     @Test
     void updateStudent() {
+        logger.debug("Execute test: updateStudent()");
         List<Student> students = studentDaoJDBC.findAll();
         if (students.size() > 0) {
             studentDaoJDBC.create(
@@ -92,6 +96,7 @@ class StudentDaoJDBCImplIT {
 
     @Test
     void deleteStudent() {
+        logger.debug("Execute test: deleteStudent()");
         studentDaoJDBC.create(
                 new Student("UserT1", "UserT2", "usert1@gmail.com", 1));
         List<Student> students = studentDaoJDBC.findAll();
@@ -101,6 +106,7 @@ class StudentDaoJDBCImplIT {
 
     @Test
     void shouldCount() {
+        logger.debug("Execute test: shouldCount()");
         assertNotNull(studentDaoJDBC);
         Integer quantity = studentDaoJDBC.count();
         assertNotNull(quantity);

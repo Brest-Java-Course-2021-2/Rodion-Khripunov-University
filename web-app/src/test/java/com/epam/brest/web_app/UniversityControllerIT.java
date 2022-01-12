@@ -76,28 +76,15 @@ class UniversityControllerIT {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
                 .andExpect(view().name("universities"))
-//                .andExpect(model().attribute("universities", hasItem(
-//                        allOf(
-//                                hasProperty("universityId", is(u1.getUniversityId())),
-//                                hasProperty("universityName", is(u1.getUniversityName())),
-//                                hasProperty("avgRating", is(u1.getAvgRating()))
-//                        )
-//                )))
-//                .andExpect(model().attribute("universities", hasItem(
-//                        allOf(
-//                                hasProperty("universityId", is(d2.getUniversityId())),
-//                                hasProperty("universityName", is(d2.getUniversityName())),
-//                                hasProperty("avgRating", is(d2.getAvgRating()))
-//                        )
-//                )))
-//                .andExpect(model().attribute("universities", hasItem(
-//                        allOf(
-//                                hasProperty("universityId", is(d3.getUniversityId())),
-//                                hasProperty("universityName", is(d3.getUniversityName())),
-//                                hasProperty("avgRating", isEmptyOrNullString())
-//                        )
-//                )))
-        ;
+                .andExpect(model().attribute("universities", hasItem(hasEntry("universityId", u1.getUniversityId()))))
+                .andExpect(model().attribute("universities", hasItem(hasEntry("universityName", u1.getUniversityName()))))
+                .andExpect(model().attribute("universities", hasItem(hasEntry("avgRating", u1.getAvgRating().intValue()))))
+                .andExpect(model().attribute("universities", hasItem(hasEntry("universityId", u2.getUniversityId()))))
+                .andExpect(model().attribute("universities", hasItem(hasEntry("universityName", u2.getUniversityName()))))
+                .andExpect(model().attribute("universities", hasItem(hasEntry("avgRating", u2.getAvgRating().intValue()))))
+                .andExpect(model().attribute("universities", hasItem(hasEntry("universityId", u3.getUniversityId()))))
+                .andExpect(model().attribute("universities", hasItem(hasEntry("universityName", u3.getUniversityName()))))
+                .andExpect(model().attribute("universities", hasItem(hasEntry("avgRating", u3.getAvgRating()))));
         mockServer.verify();
     }
 
@@ -140,12 +127,12 @@ class UniversityControllerIT {
 
     @Test
     public void shouldOpenEditUniversityPageById() throws Exception {
-        University d = createUniversity(1, "UTest");
-        mockServer.expect(ExpectedCount.once(), requestTo(new URI(UNIVERSITIES_URL + "/" + d.getUniversityId())))
+        University u = createUniversity(1, "UTest");
+        mockServer.expect(ExpectedCount.once(), requestTo(new URI(UNIVERSITIES_URL + "/" + u.getUniversityId())))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.OK)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(mapper.writeValueAsString(d))
+                        .body(mapper.writeValueAsString(u))
                 );
         mockMvc.perform(
                         MockMvcRequestBuilders.get("/university/1")

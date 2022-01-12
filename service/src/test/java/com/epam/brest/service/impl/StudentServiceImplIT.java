@@ -1,15 +1,15 @@
 package com.epam.brest.service.impl;
 
+import com.epam.brest.model.Student;
 import com.epam.brest.model.University;
+import com.epam.brest.service.StudentService;
 import com.epam.brest.service.UniversityService;
 import com.epam.brest.service.config.ServiceTestConfig;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,38 +19,38 @@ import static org.junit.jupiter.api.Assertions.*;
 @Import({ServiceTestConfig.class})
 @PropertySource({"classpath:dao.properties"})
 @Transactional
-class UniversityServiceImplIT {
+class StudentServiceImplIT {
 
     @Autowired
-    UniversityService universityService;
+    StudentService studentService;
 
     @Test
     void shouldCount() {
-        assertNotNull(universityService);
-        Integer quantity = universityService.count();
+        assertNotNull(studentService);
+        Integer quantity = studentService.count();
         assertNotNull(quantity);
         assertTrue(quantity > 0);
-        assertEquals(Integer.valueOf(3), quantity);
+        assertEquals(Integer.valueOf(5), quantity);
     }
 
     @Test
     void create() {
-        assertNotNull(universityService);
-        Integer universitySizeBefore = universityService.count();
-        assertNotNull(universitySizeBefore);
-        University university = new University("HGU");
-        Integer newUniversityId = universityService.create(university);
-        assertNotNull(newUniversityId);
-        assertEquals(universitySizeBefore, universityService.count() - 1);
+        assertNotNull(studentService);
+        Integer studentSizeBefore = studentService.count();
+        assertNotNull(studentSizeBefore);
+        Student student = new Student("UserT1", "UserT2", "usert1@gmail.com", 1);
+        Integer newStudentId = studentService.create(student);
+        assertNotNull(newStudentId);
+        assertEquals(studentSizeBefore, studentService.count() - 1);
     }
 
     @Test
-    void tryToCreateEqualsUniversities() {
-        assertNotNull(universityService);
-        University university = new University("HGU");
+    void tryToCreateEqualsStudents() {
+        assertNotNull(studentService);
+        Student student = new Student("UserT1", "UserT2", "usert1@gmail.com", 1);
         assertThrows(IllegalArgumentException.class, () -> {
-            universityService.create(university);
-            universityService.create(university);
+            studentService.create(student);
+            studentService.create(student);
         });
     }
 }

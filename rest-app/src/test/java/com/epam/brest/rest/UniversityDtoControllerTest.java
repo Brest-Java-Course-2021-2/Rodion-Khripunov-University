@@ -43,7 +43,7 @@ class UniversityDtoControllerTest {
     }
 
     @Test
-    public void shouldFindAllWithAvgSalary() throws Exception {
+    public void shouldFindAllWithAvgRating() throws Exception {
 
         Mockito.when(universityDtoService.findAllWithAvgRating()).thenReturn(Arrays.asList(create(0), create(1)));
 
@@ -54,10 +54,10 @@ class UniversityDtoControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].universityId", Matchers.is(0)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].universityName", Matchers.is("d0")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].courseAverage", Matchers.is(100)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].avgRating", Matchers.is(5)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].universityId", Matchers.is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].universityName", Matchers.is("d1")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].courseAverage", Matchers.is(101)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].avgRating", Matchers.is(6)))
         ;
 
         Mockito.verify(universityDtoService).findAllWithAvgRating();

@@ -12,6 +12,7 @@ import java.util.Collection;
 
 @RestController
 public class UniversityController {
+
     private static final Logger logger = LogManager.getLogger(UniversityController.class);
 
     private final UniversityService universityService;

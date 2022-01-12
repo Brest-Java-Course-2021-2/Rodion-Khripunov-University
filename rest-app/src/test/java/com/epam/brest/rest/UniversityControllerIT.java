@@ -6,11 +6,11 @@ import com.epam.brest.rest.exception.ErrorResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -44,7 +44,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 public class UniversityControllerIT {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UniversityControllerIT.class);
+    private static final Logger logger = LogManager.getLogger(UniversityControllerIT.class);
 
     public static final String UNIVERSITIES_ENDPOINT = "/universities";
 
@@ -159,8 +159,7 @@ public class UniversityControllerIT {
 
     @Test
     public void shouldReturnUniversityNotFoundError() throws Exception {
-
-        LOGGER.debug("shouldReturnUniversityNotFoundError()");
+        logger.debug("shouldReturnUniversityNotFoundError()");
         MockHttpServletResponse response =
                 mockMvc.perform(MockMvcRequestBuilders.get(UNIVERSITIES_ENDPOINT + "/999999")
                                 .accept(MediaType.APPLICATION_JSON)
@@ -197,19 +196,17 @@ public class UniversityControllerIT {
     class MockMvcUniversityService {
 
         public List<University> findAll() throws Exception {
-            LOGGER.debug("findAll()");
+            logger.debug("findAll()");
             MockHttpServletResponse response = mockMvc.perform(get(UNIVERSITIES_ENDPOINT)
                             .accept(MediaType.APPLICATION_JSON)
                     ).andExpect(status().isOk())
                     .andReturn().getResponse();
             assertNotNull(response);
-
             return objectMapper.readValue(response.getContentAsString(), new TypeReference<List<University>>() {});
         }
 
         public Optional<University> findById(Integer id) throws Exception {
-
-            LOGGER.debug("findById({})", id);
+            logger.debug("findById({})", id);
             MockHttpServletResponse response = mockMvc.perform(get(UNIVERSITIES_ENDPOINT + "/" + id)
                             .accept(MediaType.APPLICATION_JSON)
                     ).andExpect(status().isOk())
@@ -218,8 +215,7 @@ public class UniversityControllerIT {
         }
 
         public Integer create(University university) throws Exception {
-
-            LOGGER.debug("create({})", university);
+            logger.debug("create({})", university);
             String json = objectMapper.writeValueAsString(university);
             MockHttpServletResponse response =
                     mockMvc.perform(post(UNIVERSITIES_ENDPOINT)
@@ -232,8 +228,7 @@ public class UniversityControllerIT {
         }
 
         private int update(University university) throws Exception {
-
-            LOGGER.debug("update({})", university);
+            logger.debug("update({})", university);
             MockHttpServletResponse response =
                     mockMvc.perform(put(UNIVERSITIES_ENDPOINT)
                                     .contentType(MediaType.APPLICATION_JSON)
@@ -245,15 +240,13 @@ public class UniversityControllerIT {
         }
 
         private int delete(Integer universityId) throws Exception {
-
-            LOGGER.debug("delete(id:{})", universityId);
+            logger.debug("delete(id:{})", universityId);
             MockHttpServletResponse response = mockMvc.perform(
                             MockMvcRequestBuilders.delete(new StringBuilder(UNIVERSITIES_ENDPOINT).append("/")
                                             .append(universityId).toString())
                                     .accept(MediaType.APPLICATION_JSON)
                     ).andExpect(status().isOk())
                     .andReturn().getResponse();
-
             return objectMapper.readValue(response.getContentAsString(), Integer.class);
         }
     }

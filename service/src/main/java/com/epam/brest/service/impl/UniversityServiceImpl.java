@@ -36,7 +36,7 @@ public class UniversityServiceImpl implements UniversityService {
     public University getUniversityById(Integer universityId) {
         logger.debug("getUniversityById({})", universityId);
         try {
-            return this.universityDao.getUniversityById(universityId);
+            return universityDao.getUniversityById(universityId);
         } catch (EmptyResultDataAccessException ex) {
             throw new UniversityNotFoundException(universityId);
         }

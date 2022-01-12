@@ -23,7 +23,8 @@ public class UniversityController {
 
     private final UniversityValidator universityValidator;
 
-    public UniversityController(UniversityDtoService universityDtoService, UniversityService universityService, UniversityValidator universityValidator) {
+    public UniversityController(UniversityDtoService universityDtoService, UniversityService universityService,
+                                UniversityValidator universityValidator) {
         this.universityDtoService = universityDtoService;
         this.universityService = universityService;
         this.universityValidator = universityValidator;
@@ -59,10 +60,11 @@ public class UniversityController {
     }
 
     @PostMapping(value = "/university")
-    public final String addUniversity(University university, BindingResult result) {
+    public final String addUniversity(Model model, University university, BindingResult result) {
         logger.debug("addUniversity({})", university);
         universityValidator.validate(university, result);
         if (result.hasErrors()) {
+            model.addAttribute("isNew", true);
             return "university";
         }
         this.universityService.create(university);
@@ -70,10 +72,11 @@ public class UniversityController {
     }
 
     @PostMapping(value = "/university/{id}")
-    public final String updateUniversity(@PathVariable Integer id, University university, BindingResult result) {
-        logger.debug("addUniversity({})", university);
+    public final String updateUniversity(@PathVariable Integer id, Model model, University university, BindingResult result) {
+        logger.debug("updateUniversity({})", university);
         universityValidator.validate(university, result);
         if (result.hasErrors()) {
+            model.addAttribute("isNew", true);
             return "university";
         }
         this.universityService.update(university);

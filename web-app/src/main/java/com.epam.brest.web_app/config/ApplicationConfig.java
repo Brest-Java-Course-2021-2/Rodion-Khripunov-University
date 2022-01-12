@@ -1,7 +1,11 @@
 package com.epam.brest.web_app.config;
 
+import com.epam.brest.service.StudentDtoService;
+import com.epam.brest.service.StudentService;
 import com.epam.brest.service.UniversityDtoService;
 import com.epam.brest.service.UniversityService;
+import com.epam.brest.service.rest.StudentDtoServiceRest;
+import com.epam.brest.service.rest.StudentServiceRest;
 import com.epam.brest.service.rest.UniversityDtoServiceRest;
 import com.epam.brest.service.rest.UniversityServiceRest;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,12 +37,22 @@ public class ApplicationConfig {
         return new UniversityDtoServiceRest(url, restTemplate());
     }
 
-    ;
-
     @Bean
     UniversityService universityService() {
         String url = String.format("%s://%s:%d/universities", protocol, host, port);
         return new UniversityServiceRest(url, restTemplate());
+    }
+
+    @Bean
+    StudentDtoService studentDtoService() {
+        String url = String.format("%s://%s:%d/student_dto", protocol, host, port);
+        return new StudentDtoServiceRest(url, restTemplate());
+    }
+
+    @Bean
+    StudentService studentService() {
+        String url = String.format("%s://%s:%d/students", protocol, host, port);
+        return new StudentServiceRest(url, restTemplate());
     }
 
 }

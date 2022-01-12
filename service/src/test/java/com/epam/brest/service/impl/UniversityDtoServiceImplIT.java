@@ -16,7 +16,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 @ExtendWith(SpringExtension.class)
 @Import({ServiceTestConfig.class})
 @PropertySource({"classpath:dao.properties"})
